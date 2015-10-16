@@ -1,4 +1,4 @@
-var testAmount = 1000000;
+var testAmount = 413200;
 
 function calculate(income, taxObj){
   var level = 0;
@@ -23,6 +23,7 @@ function calculate(income, taxObj){
       else if (level === 7) {
         amounts.push(leftOver * federalTax[level].rate);
         tax += leftOver * federalTax[level].rate;
+        console.log('leftOver ********************', leftOver);
         leftOver -= (federalTax[level].bracket - federalTax[level-1].bracket);
         level++; 
         break;
@@ -40,13 +41,11 @@ function calculate(income, taxObj){
         leftOver -= (federalTax[level].bracket - federalTax[level-1].bracket);
         level++; 
       }
-      // console.log('starting', starting, 'tax', tax, 'leftOver', leftOver, 'level', level);
-      console.log('amounts:', amounts);
+      console.log('starting', starting, 'tax', tax, 'leftOver', leftOver, 'level', level);
+      // console.log('amounts:', amounts);
 
     }
-
     return tax;
-
   }
 
   return taxOwed(0, income, income, 0);
