@@ -1,17 +1,19 @@
-var testAmount = 413200;
+var testAmount = 1050000;
 
-function calculate(income, taxObj){
+var federalTax = [
+{bracket: 0, rate: 0.0},
+{bracket: 9225, rate: 0.10},
+{bracket: 37450, rate: 0.15},
+{bracket: 90750, rate: 0.25},
+{bracket: 189300, rate: 0.28},
+{bracket: 411500, rate: 0.33},
+{bracket: 413200, rate: 0.35},
+{bracket: 413200, rate: 0.396}
+];
+
+function calculate(income, taxArray){
   var level = 0;
-  var federalTax = [
-  {bracket: 0, rate: 0.0},
-  {bracket: 9225, rate: 0.10},
-  {bracket: 37450, rate: 0.15},
-  {bracket: 90750, rate: 0.25},
-  {bracket: 189300, rate: 0.28},
-  {bracket: 411500, rate: 0.33},
-  {bracket: 413200, rate: 0.35},
-  {bracket: 413200, rate: 0.396}
-  ];
+  
   function taxOwed(tax, starting, leftOver, level) {
     var amounts = [];
     while (leftOver >= 0) {
@@ -21,24 +23,24 @@ function calculate(income, taxObj){
         level++;
       }
       else if (level === 7) {
-        amounts.push(leftOver * federalTax[level].rate);
-        tax += leftOver * federalTax[level].rate;
+        amounts.push(leftOver * taxArray[level].rate);
+        tax += leftOver * taxArray[level].rate;
         console.log('leftOver ********************', leftOver);
-        leftOver -= (federalTax[level].bracket - federalTax[level-1].bracket);
+        leftOver -= (taxArray[level].bracket - taxArray[level-1].bracket);
         level++; 
         break;
       }
 
-      else if (starting > federalTax[level].bracket) {
-        amounts.push((federalTax[level].bracket - federalTax[level-1].bracket) * federalTax[level].rate);
-        tax += (federalTax[level].bracket - federalTax[level-1].bracket) * federalTax[level].rate;
-        leftOver -= (federalTax[level].bracket - federalTax[level-1].bracket);
+      else if (starting > taxArray[level].bracket) {
+        amounts.push((taxArray[level].bracket - taxArray[level-1].bracket) * taxArray[level].rate);
+        tax += (taxArray[level].bracket - taxArray[level-1].bracket) * taxArray[level].rate;
+        leftOver -= (taxArray[level].bracket - taxArray[level-1].bracket);
         level++;
       }
       else {
-        amounts.push(leftOver * federalTax[level].rate);
-        tax += leftOver * federalTax[level].rate;
-        leftOver -= (federalTax[level].bracket - federalTax[level-1].bracket);
+        amounts.push(leftOver * taxArray[level].rate);
+        tax += leftOver * taxArray[level].rate;
+        leftOver -= (taxArray[level].bracket - taxArray[level-1].bracket);
         level++; 
       }
       console.log('starting', starting, 'tax', tax, 'leftOver', leftOver, 'level', level);
@@ -51,4 +53,4 @@ function calculate(income, taxObj){
   return taxOwed(0, income, income, 0);
 }
 
-console.log('Your tax owed is: ', calculate(testAmount));
+console.log('Your tax owed is: ', calculate(testAmount, federalTax));
