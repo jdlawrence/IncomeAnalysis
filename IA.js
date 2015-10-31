@@ -1,4 +1,4 @@
-var testAmount = 1050000;
+var testAmount = 10000;
 
 var federalTax = [
 {bracket: 0, rate: 0.0},
@@ -11,6 +11,7 @@ var federalTax = [
 {bracket: 413200, rate: 0.396}
 ];
 
+// **************** Original ********************
 function calculate(income, taxArray){
   var level = 0;
   
@@ -44,13 +45,38 @@ function calculate(income, taxArray){
         level++; 
       }
       console.log('starting', starting, 'tax', tax, 'leftOver', leftOver, 'level', level);
-      // console.log('amounts:', amounts);
 
     }
     return tax;
   }
 
-  return taxOwed(0, income, income, 0);
+  return Math.max(taxOwed(0, income, income, 0) - 6200, 0);
 }
+
+// // Ramda Refactor
+// var R = require('ramda');
+// var income = 900000;
+
+// var bracketLens = R.lensProp('bracket');
+// var rateLens = R.lensProp('rate');
+
+// var findTax = function (income, current, index, list) {
+//     if (index === 0 || bracketLens(list[index-1]) > income) {
+//         return 0;
+//     } else {
+//         return R.compose(
+//             R.multiply(rateLens(current)),
+//             R.add(R.negate(bracketLens(list[index-1]))),
+//             min(bracketLens(current)) 
+//         )(income);
+//     }
+// };
+
+// var curriedFindTax = R.curry(findTax);
+
+// taxScale = R.compose(
+//     R.reduce(R.add),
+//     R.addIndex(R.map)(findTax(income))
+// );
 
 console.log('Your tax owed is: ', calculate(testAmount, federalTax));
