@@ -1,0 +1,22 @@
+{
+  "name": "incomeAnalysis",
+  "version": "1.0.0",
+  "description": "A calculator of take home income determined by custom input and location",
+  "main": "IA.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jdlawrence/IncomeAnalysis.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jdlawrence/IncomeAnalysis/issues"
+  },
+  "homepage": "https://github.com/jdlawrence/IncomeAnalysis",
+  "dependencies": {
+    "ramda": "^0.18.0"
+  }
+}

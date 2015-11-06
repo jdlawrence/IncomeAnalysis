@@ -1,4 +1,5 @@
-var testAmount = 10000;
+var testAmount = 105000;
+var standardDeduction = 6200;
 
 var federalTax = [
 {bracket: 0, rate: 0.0},
@@ -11,8 +12,14 @@ var federalTax = [
 {bracket: 413200, rate: 0.396}
 ];
 
+var expenses = {
+  rent: 0,
+  bills: 0,
+  fedTax: federalTax
+};
+
 // **************** Original ********************
-function calculate(income, taxArray){
+function calculate(income, expensesObj){
   var level = 0;
   
   function taxOwed(tax, starting, leftOver, level) {
@@ -24,24 +31,24 @@ function calculate(income, taxArray){
         level++;
       }
       else if (level === 7) {
-        amounts.push(leftOver * taxArray[level].rate);
-        tax += leftOver * taxArray[level].rate;
+        amounts.push(leftOver * expensesObj.fedTax[level].rate);
+        tax += leftOver * expensesObj.fedTax[level].rate;
         console.log('leftOver ********************', leftOver);
-        leftOver -= (taxArray[level].bracket - taxArray[level-1].bracket);
+        leftOver -= (expensesObj.fedTax[level].bracket - expensesObj.fedTax[level-1].bracket);
         level++; 
         break;
       }
 
-      else if (starting > taxArray[level].bracket) {
-        amounts.push((taxArray[level].bracket - taxArray[level-1].bracket) * taxArray[level].rate);
-        tax += (taxArray[level].bracket - taxArray[level-1].bracket) * taxArray[level].rate;
-        leftOver -= (taxArray[level].bracket - taxArray[level-1].bracket);
+      else if (starting > expensesObj.fedTax[level].bracket) {
+        amounts.push((expensesObj.fedTax[level].bracket - expensesObj.fedTax[level-1].bracket) * expensesObj.fedTax[level].rate);
+        tax += (expensesObj.fedTax[level].bracket - expensesObj.fedTax[level-1].bracket) * expensesObj.fedTax[level].rate;
+        leftOver -= (expensesObj.fedTax[level].bracket - expensesObj.fedTax[level-1].bracket);
         level++;
       }
       else {
-        amounts.push(leftOver * taxArray[level].rate);
-        tax += leftOver * taxArray[level].rate;
-        leftOver -= (taxArray[level].bracket - taxArray[level-1].bracket);
+        amounts.push(leftOver * expensesObj.fedTax[level].rate);
+        tax += leftOver * expensesObj.fedTax[level].rate;
+        leftOver -= (expensesObj.fedTax[level].bracket - expensesObj.fedTax[level-1].bracket);
         level++; 
       }
       console.log('starting', starting, 'tax', tax, 'leftOver', leftOver, 'level', level);
@@ -50,7 +57,7 @@ function calculate(income, taxArray){
     return tax;
   }
 
-  return Math.max(taxOwed(0, income, income, 0) - 6200, 0);
+  return Math.max(taxOwed(0, income, income, 0) - standardDeduction, 0);
 }
 
 // // Ramda Refactor
@@ -79,4 +86,4 @@ function calculate(income, taxArray){
 //     R.addIndex(R.map)(findTax(income))
 // );
 
-console.log('Your tax owed is: ', calculate(testAmount, federalTax));
+console.log('Your tax owed is: ', calculate(testAmount, expenses));
