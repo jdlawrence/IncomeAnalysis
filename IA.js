@@ -1,4 +1,4 @@
-var testAmount = 105000;
+var income = 105000;
 var standardDeduction = 6200;
 
 var federalTax = [
@@ -15,11 +15,38 @@ var federalTax = [
 var expenses = {
   rent: 0,
   bills: 0,
+  savingsRate: 0.10,
+  // savings: income * expenses.savingsRate,
+  housing: 18000,
+  utilities: 5400,
+  food: 10950,
+  carInsurance: 2500,
+  medical: 1000,
+  retirementRate: 0.15,
+  // retirement: income * this.retirementRate,
   fedTax: federalTax
 };
 
+expenses.savings = income * expenses.savingsRate;
+expenses.retirement = income * expenses.retirementRate;
+// var expenses = {
+//   this.rent = 0;
+//   this.bills = 0;
+//   this.savingsRate = 0.10;
+//   this.savings =  income * this.savingsRate;
+//   this.housing = 18000;
+//   this.utilities = 5400;
+//   this.food = 10950;
+//   this.carInsurance = 2500;
+//   this.medical = 1000;
+//   this.retirementRate = 0.15;
+//   this.fedTax = federalTax;
+//   this.retirement = income * this.retirementRate;
+//   this.fedTax = federalTax;
+// };
+
 // **************** Original ********************
-function calculate(income, expensesObj){
+function calculateTax(income, expensesObj){
   var level = 0;
   
   function taxOwed(tax, starting, leftOver, level) {
@@ -33,7 +60,7 @@ function calculate(income, expensesObj){
       else if (level === 7) {
         amounts.push(leftOver * expensesObj.fedTax[level].rate);
         tax += leftOver * expensesObj.fedTax[level].rate;
-        console.log('leftOver ********************', leftOver);
+        // console.log('leftOver ********************', leftOver);
         leftOver -= (expensesObj.fedTax[level].bracket - expensesObj.fedTax[level-1].bracket);
         level++; 
         break;
@@ -51,13 +78,13 @@ function calculate(income, expensesObj){
         leftOver -= (expensesObj.fedTax[level].bracket - expensesObj.fedTax[level-1].bracket);
         level++; 
       }
-      console.log('starting', starting, 'tax', tax, 'leftOver', leftOver, 'level', level);
+      // console.log('starting', starting, 'tax', tax, 'leftOver', leftOver, 'level', level);
 
     }
     return tax;
   }
 
-  return Math.max(taxOwed(0, income, income, 0) - standardDeduction, 0);
+  return Math.max(taxOwed(0, income, income, 0) - standardDeduction, 0) ;
 }
 
 // // Ramda Refactor
@@ -86,4 +113,12 @@ function calculate(income, expensesObj){
 //     R.addIndex(R.map)(findTax(income))
 // );
 
-console.log('Your tax owed is: ', calculate(testAmount, expenses));
+console.log('Your tax owed is: ', calculateTax(income, expenses));
+
+console.log('Your disposable is income is: ', income 
+                                            - calculateTax(income, expenses)
+                                            - expenses.savings);
+
+
+
+
