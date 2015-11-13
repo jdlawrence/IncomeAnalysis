@@ -16,34 +16,18 @@ var expenses = {
   rent: 0,
   bills: 0,
   savingsRate: 0.10,
-  // savings: income * expenses.savingsRate,
   housing: 18000,
   utilities: 5400,
   food: 10950,
   carInsurance: 2500,
   medical: 1000,
   retirementRate: 0.15,
-  // retirement: income * this.retirementRate,
   fedTax: federalTax
 };
 
 expenses.savings = income * expenses.savingsRate;
 expenses.retirement = income * expenses.retirementRate;
-// var expenses = {
-//   this.rent = 0;
-//   this.bills = 0;
-//   this.savingsRate = 0.10;
-//   this.savings =  income * this.savingsRate;
-//   this.housing = 18000;
-//   this.utilities = 5400;
-//   this.food = 10950;
-//   this.carInsurance = 2500;
-//   this.medical = 1000;
-//   this.retirementRate = 0.15;
-//   this.fedTax = federalTax;
-//   this.retirement = income * this.retirementRate;
-//   this.fedTax = federalTax;
-// };
+
 
 // **************** Original ********************
 function calculateTax(income, expensesObj){

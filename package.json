@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/jdlawrence/IncomeAnalysis",
   "dependencies": {
+    "angular": "^1.4.7",
+    "bootstrap": "^3.3.5",
     "ramda": "^0.18.0"
   }
 }

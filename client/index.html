@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>title</title>
+  <!-- <script language="javascript" type="text/javascript" src="../IA.js"></script> -->
+  <!-- <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.css" /> -->
+</head>
+<body ng-app="IA">
+  asldfj
+  <div id="header"></div>
+  <div id="main">
+    <p>
+      I am {{ 4 + 6}}
+    </p>
+    <div>
+      Income: <input type="number" min="0" ng-model="income">
+    </div>
+    <div>
+      Retirement Rate: <input type="number" min="0" ng-model="retirementRate">
+    </div>
+    <div>
+      Medical: <input type="number" min="0" ng-model="medical">
+    </div>
+    <div>
+      Income: <input type="number" min="0" ng-model="income">
+    </div>
+    <div><b>Taxes: </b> {{ income * 0.2 | currency }} </div>
+    <div><b>Disposable Income: </b> {{ income - income * 0.2 | currency }} </div>
+
+  </div>
+  <div id="footer"></div>
+  <script language="javascript" type="text/javascript" src="../node_modules/angular/angular.js"></script>
+  <script language="javascript" type="text/javascript" src="./app.js"></script>
+</body>
+</html>
