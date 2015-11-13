@@ -7,26 +7,25 @@
   <!-- <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.css" /> -->
 </head>
 <body ng-app="IA">
-  asldfj
   <div id="header"></div>
   <div id="main">
-    <p>
-      I am {{ 4 + 6}}
-    </p>
-    <div>
-      Income: <input type="number" min="0" ng-model="income">
+    <div ng-controller='incomeController'>
+      <div>
+        Income: <input type="number" min="0" ng-model="income">
+      </div>
+      <div>
+        Retirement Rate: <input type="number" min="0" ng-model="retirementRate">
+      </div>
+      <div>
+        Medical: <input type="number" min="0" ng-model="medical">
+      </div>
+      <div>
+        Income: <input type="number" min="0" ng-model="income">
+      </div>
+      <div><b>Taxes: </b> {{ tax | currency }} </div>
+      <div><b>Something: </b> {{ something }} </div>
+      <div><b>Disposable Income: </b> {{ income - income * 0.2 | currency }} </div>
     </div>
-    <div>
-      Retirement Rate: <input type="number" min="0" ng-model="retirementRate">
-    </div>
-    <div>
-      Medical: <input type="number" min="0" ng-model="medical">
-    </div>
-    <div>
-      Income: <input type="number" min="0" ng-model="income">
-    </div>
-    <div><b>Taxes: </b> {{ income * 0.2 | currency }} </div>
-    <div><b>Disposable Income: </b> {{ income - income * 0.2 | currency }} </div>
 
   </div>
   <div id="footer"></div>
