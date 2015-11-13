@@ -1,11 +1,11 @@
 var app = angular.module('IA', []);
 
-app.controller('incomeController', ['$scope', function($scope){
+app.controller('incomeController', ['$scope', 'CalculateTax', function($scope, CalculateTax){
   var standardDeduction = 6200;
 
   $scope.income = 105000;
   // $scope.tax = $scope.income * 0.2;
-  $scope.something = 'jamil';
+  $scope.something = CalculateTax.getName();
 
   var federalTax = [
   {bracket: 0, rate: 0.0},
@@ -72,6 +72,25 @@ app.controller('incomeController', ['$scope', function($scope){
   return Math.max(taxOwed(0, income, income, 0) - standardDeduction, 0) ;
 }
 
-  $scope.tax = calculateTax($scope.income, $scope.expenses);
-  
+$scope.tax = calculateTax($scope.income, $scope.expenses);
+
 }]);
+
+// app.service('CalculateTax', function(){
+//   var name = 'smooth';
+
+//   this.getName = function(){
+//     return name;
+//   };
+// });
+
+
+app.factory('CalculateTax', function(){
+  var name = 'smooth';
+
+  return {
+    getName: function(){
+      return name;
+    }
+  };
+});
