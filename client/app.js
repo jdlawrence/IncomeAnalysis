@@ -1,11 +1,9 @@
 var app = angular.module('IA', []);
 
-app.controller('incomeController', ['$scope', 'CalculateTax', function($scope, CalculateTax){
+app.controller('incomeController', ['$scope', 'Calculate', function($scope, Calculate){
   var standardDeduction = 6200;
 
   $scope.income = 105000;
-  // $scope.tax = $scope.income * 0.2;
-  $scope.something = CalculateTax.getName();
 
   var federalTax = [
   {bracket: 0, rate: 0.0},
@@ -17,7 +15,7 @@ app.controller('incomeController', ['$scope', 'CalculateTax', function($scope, C
   {bracket: 413200, rate: 0.35},
   {bracket: 413200, rate: 0.396}
   ];
-
+  
   $scope.expenses = {
     rent: 0,
     bills: 0,
@@ -31,66 +29,58 @@ app.controller('incomeController', ['$scope', 'CalculateTax', function($scope, C
     fedTax: federalTax
   };
 
-  function calculateTax(income, expensesObj){
+  $scope.tax = Calculate.calculateTax($scope.income, $scope.expenses);
+  // $scope.tax = Calculate.add(100, 250);
+
+}]);
+
+app.service('Calculate', function(){
+  var standardDeduction = 6200;
+
+  this.add = function(a, b) {
+    return a + b;
+  };
+
+  this.calculateTax = function(income, expensesObj){
     var level = 0;
 
     function taxOwed(tax, starting, leftOver, level) {
       var amounts = [];
       while (leftOver >= 0) {
-      // If starting amount is greater than bracket, add entire amount to tax,
-      // and subtract bracket from leftOver
-      if (level === 0) {
-        level++;
-      }
-      else if (level === 7) {
-        amounts.push(leftOver * expensesObj.fedTax[level].rate);
-        tax += leftOver * expensesObj.fedTax[level].rate;
-        // console.log('leftOver ********************', leftOver);
-        leftOver -= (expensesObj.fedTax[level].bracket - expensesObj.fedTax[level-1].bracket);
-        level++; 
-        break;
-      }
+        // If starting amount is greater than bracket, add entire amount to tax,
+        // and subtract bracket from leftOver
+        if (level === 0) {
+          level++;
+        }
+        else if (level === 7) {
+          amounts.push(leftOver * expensesObj.fedTax[level].rate);
+          tax += leftOver * expensesObj.fedTax[level].rate;
+          leftOver -= (expensesObj.fedTax[level].bracket - expensesObj.fedTax[level-1].bracket);
+          level++; 
+          break;
+        }
 
-      else if (starting > expensesObj.fedTax[level].bracket) {
-        amounts.push((expensesObj.fedTax[level].bracket - expensesObj.fedTax[level-1].bracket) * expensesObj.fedTax[level].rate);
-        tax += (expensesObj.fedTax[level].bracket - expensesObj.fedTax[level-1].bracket) * expensesObj.fedTax[level].rate;
-        leftOver -= (expensesObj.fedTax[level].bracket - expensesObj.fedTax[level-1].bracket);
-        level++;
-      }
-      else {
-        amounts.push(leftOver * expensesObj.fedTax[level].rate);
-        tax += leftOver * expensesObj.fedTax[level].rate;
-        leftOver -= (expensesObj.fedTax[level].bracket - expensesObj.fedTax[level-1].bracket);
-        level++; 
-      }
-      // console.log('starting', starting, 'tax', tax, 'leftOver', leftOver, 'level', level);
+        else if (starting > expensesObj.fedTax[level].bracket) {
+          amounts.push((expensesObj.fedTax[level].bracket - expensesObj.fedTax[level-1].bracket) * expensesObj.fedTax[level].rate);
+          tax += (expensesObj.fedTax[level].bracket - expensesObj.fedTax[level-1].bracket) * expensesObj.fedTax[level].rate;
+          leftOver -= (expensesObj.fedTax[level].bracket - expensesObj.fedTax[level-1].bracket);
+          level++;
+        }
+        else {
+          amounts.push(leftOver * expensesObj.fedTax[level].rate);
+          tax += leftOver * expensesObj.fedTax[level].rate;
+          leftOver -= (expensesObj.fedTax[level].bracket - expensesObj.fedTax[level-1].bracket);
+          level++; 
+        }
 
+      }
+      return tax;
     }
-    return tax;
-  }
 
-  return Math.max(taxOwed(0, income, income, 0) - standardDeduction, 0) ;
-}
-
-$scope.tax = calculateTax($scope.income, $scope.expenses);
-
-}]);
-
-// app.service('CalculateTax', function(){
-//   var name = 'smooth';
-
-//   this.getName = function(){
-//     return name;
-//   };
-// });
-
-
-app.factory('CalculateTax', function(){
-  var name = 'smooth';
-
-  return {
-    getName: function(){
-      return name;
-    }
+    return Math.max(taxOwed(0, income, income, 0) - standardDeduction, 0) ;
   };
+
 });
+
+
+
