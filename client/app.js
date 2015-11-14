@@ -29,9 +29,11 @@ app.controller('incomeController', ['$scope', 'Calculate', function($scope, Calc
     fedTax: federalTax
   };
 
-  $scope.tax = Calculate.calculateTax($scope.income, $scope.expenses);
-  // $scope.tax = Calculate.add(100, 250);
-
+  $scope.updateTax = function(){
+    $scope.tax = Calculate.calculateTax($scope.income, $scope.expenses);
+    // $scope.tax = Calculate.add(100, 250);
+  };
+  
 }]);
 
 app.service('Calculate', function(){

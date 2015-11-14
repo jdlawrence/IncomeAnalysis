@@ -11,7 +11,7 @@
   <div id="main">
     <div ng-controller='incomeController'>
       <div>
-        Income: <input type="number" min="0" ng-model="income">
+        Income: <input type="number" min="0" ng-model="income" ng-change="updateTax()">
       </div>
       <div>
         Retirement Rate: <input type="number" min="0" ng-model="retirementRate">
