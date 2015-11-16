@@ -11,19 +11,26 @@
   <div id="main">
     <div ng-controller='incomeController'>
       <div>
-        Income: <input type="number" min="0" ng-model="income" ng-change="updateTax()">
+        Income: <input type="number" min="0" ng-model="income" ng-init="updateIncome()" ng-change="updateTax()">
       </div>
       <div>
-        Retirement Rate: <input type="number" min="0" ng-model="retirementRate">
+        Retirement Rate%: <input type="number" min="0" ng-model="expenses.retirementRate">
       </div>
       <div>
-        Medical: <input type="number" min="0" ng-model="medical">
+        SavingsRate Rate%: <input type="number" min="0" ng-model="expenses.savingsRate">
+      </div>
+      <div>
+        Medical: <input type="number" min="0" ng-model="expenses.medical">
+      </div>
+      <div>
+        Car Insurance: <input type="number" min="0" ng-model="expenses.medical">
       </div>
       <div>
         Income: <input type="number" min="0" ng-model="income">
       </div>
       <div><b>Taxes: </b> {{ tax | currency }} </div>
-      <div><b>Disposable Income: </b> {{ income - income * 0.2 | currency }} </div>
+      <!-- <div><b>Disposable Income: </b> {{ income - income * 0.2 | currency }} </div> -->
+      <div><b>Disposable Income: </b> {{ disposableIncome | currency }} </div>
     </div>
 
   </div>
