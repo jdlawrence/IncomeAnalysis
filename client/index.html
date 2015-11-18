@@ -42,8 +42,9 @@
       </div>
       <div>
         Car Insurance: <input type="number" min="0" ng-model="expenses.carInsurance" ng-change="updateIncome()">
-      </div>
-      
+      </div> 
+
+      <div><b>Usable Income: </b> {{ usableIncome | currency }} </div>
       <div><b>Taxes: </b> {{ tax | currency }} </div>
       <div><b>Disposable Income: </b> {{ disposableIncome | currency }} </div>
     </div>
