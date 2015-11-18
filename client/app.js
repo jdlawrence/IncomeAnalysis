@@ -2,10 +2,11 @@ var app = angular.module('IA', []);
 
 app.controller('incomeController', ['$scope', 'Calculate', function($scope, Calculate){
   var standardDeduction = 6200;
+  var exemption = 3900;
 
   $scope.income = 105000;
-
   $scope.numExemptions = 1;
+  $scope.taxableIncome = $scope.income - $scope.numExemptions * exemption; 
 
   var federalTax = [
   {bracket: 0, rate: 0.0},
@@ -32,14 +33,16 @@ app.controller('incomeController', ['$scope', 'Calculate', function($scope, Calc
   };
 
   $scope.updateIncome = function(){
-    $scope.tax = Calculate.calculateTax($scope.income - $scope.numExemptions * 3900, $scope.expenses);
+    $scope.taxableIncome = $scope.income - $scope.numExemptions * exemption;
+    console.log('$scope.exemptionTotal', $scope.taxableIncome);
+    $scope.tax = Calculate.calculateTax($scope.taxableIncome, $scope.expenses);
     $scope.disposableIncome = $scope.income 
                             - $scope.expenses.medical
                             - $scope.income * $scope.expenses.retirementRate / 100
                             - $scope.income * $scope.expenses.savingsRate / 100
                             - $scope.expenses.carInsurance
                             - $scope.expenses.housing 
-                            - $scope.expensesObj.bills
+                            - $scope.expenses.bills
                             - $scope.tax;
   };
   
