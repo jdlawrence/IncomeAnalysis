@@ -7,6 +7,7 @@ app.controller('incomeController', ['$scope', 'Calculate', function($scope, Calc
   $scope.income = 105000;
   $scope.numExemptions = 1;
   $scope.taxableIncome = $scope.income - $scope.numExemptions * exemption; 
+  $scope.usableIncome = 0;
 
   var federalTax = [
   {bracket: 0, rate: 0.0},
@@ -24,7 +25,6 @@ app.controller('incomeController', ['$scope', 'Calculate', function($scope, Calc
     bills: 5400,
     food: 30,
     savingsRate: 10,
-    housing: 18000,
     utilities: 5400,
     carInsurance: 1500,
     medical: 1000,
@@ -36,6 +36,7 @@ app.controller('incomeController', ['$scope', 'Calculate', function($scope, Calc
     $scope.taxableIncome = $scope.income - $scope.numExemptions * exemption;
     console.log('$scope.exemptionTotal', $scope.taxableIncome);
     $scope.tax = Calculate.calculateTax($scope.taxableIncome, $scope.expenses);
+    $scope.usableIncome = $scope.income - $scope.tax;
     $scope.disposableIncome = $scope.income 
                             - $scope.expenses.medical
                             - $scope.income * $scope.expenses.retirementRate / 100
