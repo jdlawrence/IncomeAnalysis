@@ -22,10 +22,10 @@ app.controller('incomeController', ['$scope', 'Calculate', function($scope, Calc
   $scope.expenses = {
     housing: 18000,
     bills: 5400,
+    food: 30,
     savingsRate: 10,
     housing: 18000,
     utilities: 5400,
-    food: 10950,
     carInsurance: 1500,
     medical: 1000,
     retirementRate: 10,
@@ -43,6 +43,7 @@ app.controller('incomeController', ['$scope', 'Calculate', function($scope, Calc
                             - $scope.expenses.carInsurance
                             - $scope.expenses.housing 
                             - $scope.expenses.bills
+                            - $scope.expenses.food * 30
                             - $scope.tax;
   };
   
