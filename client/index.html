@@ -11,25 +11,31 @@
   <div id="main">
     <div ng-controller='incomeController'>
       <div>
-        Income: <input type="number" min="0" ng-model="income" ng-init="updateIncome()" ng-change="updateTax()">
+        Income: <input type="number" min="0" ng-model="income" ng-init="updateIncome()" ng-change="updateIncome()">
+      </div>
+       <div>
+        Number of Exemptions: <input type="number" min="0" ng-model="numExemptions" ng-init="updateIncome()" ng-change="updateIncome()">
+      </div>
+       <div>
+        Taxable Income: <input type="number" min="0" ng-model="taxableIncome" ng-init="updateIncome()" ng-change="updateIncome()">
+      </div> 
+      <div>
+        Retirement Rate%: <input type="number" min="0" ng-model="expenses.retirementRate" ng-change="updateIncome()">
       </div>
       <div>
-        Retirement Rate%: <input type="number" min="0" ng-model="expenses.retirementRate">
+        Savings Rate%: <input type="number" min="0" ng-model="expenses.savingsRate" ng-change="updateIncome()">
       </div>
       <div>
-        SavingsRate Rate%: <input type="number" min="0" ng-model="expenses.savingsRate">
+        Medical: <input type="number" min="0" ng-model="expenses.medical" ng-change="updateIncome()">
       </div>
       <div>
-        Medical: <input type="number" min="0" ng-model="expenses.medical">
+        Housing: <input type="number" min="0" ng-model="expenses.housing" ng-change="updateIncome()">
       </div>
-      <div>
-        Car Insurance: <input type="number" min="0" ng-model="expenses.medical">
+       <div>
+        Car Insurance: <input type="number" min="0" ng-model="expenses.carInsurance" ng-change="updateIncome()">
       </div>
-      <div>
-        Income: <input type="number" min="0" ng-model="income">
-      </div>
+      
       <div><b>Taxes: </b> {{ tax | currency }} </div>
-      <!-- <div><b>Disposable Income: </b> {{ income - income * 0.2 | currency }} </div> -->
       <div><b>Disposable Income: </b> {{ disposableIncome | currency }} </div>
     </div>
 

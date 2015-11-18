@@ -4,7 +4,8 @@ app.controller('incomeController', ['$scope', 'Calculate', function($scope, Calc
   var standardDeduction = 6200;
 
   $scope.income = 105000;
-  // $scope.tax = 0;
+
+  $scope.numExemptions = 1;
 
   var federalTax = [
   {bracket: 0, rate: 0.0},
@@ -18,25 +19,27 @@ app.controller('incomeController', ['$scope', 'Calculate', function($scope, Calc
   ];
   
   $scope.expenses = {
-    rent: 0,
-    bills: 0,
-    savingsRate: 0.10,
+    housing: 18000,
+    bills: 5400,
+    savingsRate: 10,
     housing: 18000,
     utilities: 5400,
     food: 10950,
     carInsurance: 1500,
     medical: 1000,
-    retirementRate: 0.15,
+    retirementRate: 10,
     fedTax: federalTax
   };
 
   $scope.updateIncome = function(){
-    $scope.tax = Calculate.calculateTax($scope.income, $scope.expenses);
+    $scope.tax = Calculate.calculateTax($scope.income - $scope.numExemptions * 3900, $scope.expenses);
     $scope.disposableIncome = $scope.income 
                             - $scope.expenses.medical
-                            - $scope.income * $scope.expenses.retirementRate
-                            - $scope.income * $scope.expenses.savingsRate
+                            - $scope.income * $scope.expenses.retirementRate / 100
+                            - $scope.income * $scope.expenses.savingsRate / 100
                             - $scope.expenses.carInsurance
+                            - $scope.expenses.housing 
+                            - $scope.expensesObj.bills
                             - $scope.tax;
   };
   
