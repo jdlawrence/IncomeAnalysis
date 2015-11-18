@@ -13,10 +13,10 @@
       <div>
         Income: <input type="number" min="0" ng-model="income" ng-init="updateIncome()" ng-change="updateIncome()">
       </div>
-       <div>
+      <div>
         Number of Exemptions: <input type="number" min="0" ng-model="numExemptions" ng-init="updateIncome()" ng-change="updateIncome()">
       </div>
-       <div>
+      <div>
         Taxable Income: <input type="number" min="0" ng-model="taxableIncome" ng-init="updateIncome()" ng-change="updateIncome()">
       </div> 
       <div>
@@ -31,7 +31,10 @@
       <div>
         Housing: <input type="number" min="0" ng-model="expenses.housing" ng-change="updateIncome()">
       </div>
-       <div>
+      <div>
+        Bill and Utilities: <input type="number" min="0" ng-model="expenses.bills" ng-change="updateIncome()">
+      </div>
+      <div>
         Car Insurance: <input type="number" min="0" ng-model="expenses.carInsurance" ng-change="updateIncome()">
       </div>
       
