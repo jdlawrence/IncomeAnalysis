@@ -20,10 +20,10 @@
         Taxable Income: <input type="number" min="0" ng-model="taxableIncome" ng-init="updateIncome()" ng-change="updateIncome()">
       </div>
       <div>
-        Food Cost (daily): <input type="number" min="0" ng-model="food" ng-init="updateIncome()" ng-change="updateIncome()">
+        Food Cost (daily): <input type="number" min="0" ng-model="expenses.food" ng-init="updateIncome()" ng-change="updateIncome()">
       </div> 
       <div>
-        Food Cost (annual):  {{ food * 365 }} <input type="number" min="0" ng-model="taxableIncome" ng-init="updateIncome()" ng-change="updateIncome()">
+        Food Cost (annual):  {{ expenses.food * 365 }} 
       </div>  
       <div>
         Retirement Rate%: <input type="number" min="0" ng-model="expenses.retirementRate" ng-change="updateIncome()">
