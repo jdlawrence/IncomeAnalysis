@@ -68,7 +68,8 @@ function calculateTax(income, expensesObj){
     return tax;
   }
 
-  return Math.max(taxOwed(0, income, income, 0) - standardDeduction, 0) ;
+  console.log('tax is:', taxOwed(0, income, income, 0));
+  return Math.max(taxOwed(0, income - standardDeduction, income - standardDeduction, 0), 0) ;
 }
 
 // // Ramda Refactor

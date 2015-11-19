@@ -33,9 +33,10 @@ app.controller('incomeController', ['$scope', 'Calculate', function($scope, Calc
   };
 
   $scope.updateIncome = function(){
-    $scope.taxableIncome = $scope.income - $scope.numExemptions * exemption;
+    $scope.taxableIncome = $scope.income - $scope.numExemptions * exemption - standardDeduction;
     console.log('$scope.exemptionTotal', $scope.taxableIncome);
     $scope.tax = Calculate.calculateTax($scope.taxableIncome, $scope.expenses);
+    console.log('$scope.tax', $scope.tax);
     $scope.usableIncome = $scope.income - $scope.tax;
     $scope.disposableIncome = $scope.income 
                             - $scope.expenses.medical
@@ -51,8 +52,6 @@ app.controller('incomeController', ['$scope', 'Calculate', function($scope, Calc
 }]);
 
 app.service('Calculate', function(){
-  var standardDeduction = 6200;
-
   this.add = function(a, b) {
     return a + b;
   };
@@ -93,7 +92,7 @@ app.service('Calculate', function(){
       return tax;
     }
 
-    return Math.max(taxOwed(0, income, income, 0) - standardDeduction, 0) ;
+    return Math.max(taxOwed(0, income, income, 0), 0) ;
   };
 
 });
