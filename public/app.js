@@ -45,7 +45,7 @@ app.controller('incomeController', ['$scope', 'Calculate', function($scope, Calc
                             - $scope.expenses.carInsurance
                             - $scope.expenses.housing 
                             - $scope.expenses.bills
-                            - $scope.expenses.food * 30
+                            - $scope.expenses.food * 365
                             - $scope.tax;
   };
   
