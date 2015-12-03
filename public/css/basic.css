@@ -1,4 +1,19 @@
+/*Necessary to get cooperation between Angular and Bootstrap*/
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
 #main {
   margin-left: 20px;
-  font-family: 'Lato';
+  font-family: 'Lato', sans-serif;
+}
+
+#incomeFields {
+  background-color: #6c6c93;
+}
+
+#box3 {
+  border: solid 9px #ccc
+}
+
+#box9 {
+ border: solid 91px #39d 
 }
