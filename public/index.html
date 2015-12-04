@@ -17,21 +17,22 @@
 </head>
 <body ng-app="IA">
   <div class="container">
-  <div class="row">
-        <div class="col-sm-3" id="box3">Small 3</div>
-        <div class="col-sm-9" id="box9">Small 9</div>
+    <div class="row">
+      <div class="col-sm-3" id="box3">Small 3</div>
+      <div class="col-sm-9" id="box9">Small 9</div>
     </div>
     <div id="header"></div>
     <div id="main">
       <div ng-controller='incomeController'>
-        <div id="incomeFields">
-          <div>
+        <div class="incomeFields">
+          <h3>Income Fields</h3>
+          <div class="incomeInput">
             Income: <input type="number" min="0" ng-model="income" ng-init="updateIncome()" ng-change="updateIncome()">
           </div>
-          <div>
+          <div class="incomeInput">
             Number of Exemptions: <input type="number" min="0" ng-model="numExemptions" ng-init="updateIncome()" ng-change="updateIncome()">
           </div>
-          <div>
+          <div class="incomeInput">
             Taxable Income: <input type="number" min="0" ng-model="taxableIncome" ng-init="updateIncome()" ng-change="updateIncome()">
           </div>
         </div>
