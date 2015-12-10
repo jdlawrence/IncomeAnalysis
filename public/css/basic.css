@@ -6,17 +6,33 @@
   font-family: 'Lato', sans-serif;
 }
 
-.incomeFields {
-  background-color: #B6B6B6;
+.incomeFields, .bottomLine {
+  border-radius: 6px; 
   margin: 10px;
   padding: 10px;
 }
 
-.incomeInput {
-  background-color: #E6E6E6;
+.incomeInput, .finalAmounts {
+  border-radius: 6px; 
   margin: 5px;
   padding: 8px;
+}
 
+.incomeFields {
+  background-color: #B6B6B6;
+}
+
+.incomeInput {
+  background-color: #E6E6E6;
+}
+
+.bottomLine {
+  font-weight: 2rem;
+  background-color: #00B386;
+}
+
+.finalAmounts {
+  background-color: #009973;
 }
 
 #box3 {

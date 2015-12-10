@@ -17,10 +17,6 @@
 </head>
 <body ng-app="IA">
   <div class="container">
-    <div class="row">
-      <div class="col-sm-3" id="box3">Small 3</div>
-      <div class="col-sm-9" id="box9">Small 9</div>
-    </div>
     <div id="header"></div>
     <div id="main">
       <div ng-controller='incomeController'>
@@ -61,9 +57,11 @@
           Car Insurance: <input type="number" min="0" ng-model="expenses.carInsurance" ng-change="updateIncome()">
         </div> 
 
-        <div><b>Usable Income: </b> {{ usableIncome | currency }} </div>
-        <div><b>Taxes: </b> {{ tax | currency }} </div>
-        <div><b>Disposable Income: </b> {{ disposableIncome | currency }} </div>
+        <div class="bottomLine">Your bottom line
+        <div class="finalAmounts"><b>Usable Income: </b> {{ usableIncome | currency }} </div>
+          <div class="finalAmounts"><b>Taxes: </b> {{ tax | currency }} </div>
+          <div class="finalAmounts"><b>Disposable Income: </b> {{ disposableIncome | currency }} </div>
+        </div>
       </div>
 
     </div>
