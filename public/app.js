@@ -4,10 +4,17 @@ app.controller('incomeController', ['$scope', 'Calculate', function($scope, Calc
   var standardDeduction = 6200;
   var exemption = 3900;
 
+  // 1st City
   $scope.income = 105000;
   $scope.numExemptions = 1;
   $scope.taxableIncome = $scope.income - $scope.numExemptions * exemption; 
   $scope.usableIncome = 0;
+
+  // 2nd City
+  $scope.income2 = 105000;
+  $scope.numExemptions2 = 1;
+  $scope.taxableIncome2 = $scope.income2 - $scope.numExemptions2 * exemption; 
+  $scope.usableIncome2 = 0;
 
   var federalTax = [
   {bracket: 0, rate: 0.0},
@@ -20,7 +27,21 @@ app.controller('incomeController', ['$scope', 'Calculate', function($scope, Calc
   {bracket: 413200, rate: 0.396}
   ];
   
+  // 1st city expenses
   $scope.expenses = {
+    housing: 18000,
+    bills: 5400,
+    food: 30,
+    savingsRate: 10,
+    utilities: 5400,
+    carInsurance: 1500,
+    medical: 1000,
+    retirementRate: 10,
+    fedTax: federalTax
+  };
+
+  // 2nd city expenses
+  $scope.expenses2 = {
     housing: 18000,
     bills: 5400,
     food: 30,
@@ -34,19 +55,30 @@ app.controller('incomeController', ['$scope', 'Calculate', function($scope, Calc
 
   $scope.updateIncome = function(){
     $scope.taxableIncome = $scope.income - $scope.numExemptions * exemption - standardDeduction;
-    console.log('$scope.exemptionTotal', $scope.taxableIncome);
     $scope.tax = Calculate.calculateTax($scope.taxableIncome, $scope.expenses);
-    console.log('$scope.tax', $scope.tax);
     $scope.usableIncome = $scope.income - $scope.tax;
     $scope.disposableIncome = $scope.income 
-                            - $scope.expenses.medical
-                            - $scope.income * $scope.expenses.retirementRate / 100
-                            - $scope.income * $scope.expenses.savingsRate / 100
-                            - $scope.expenses.carInsurance
-                            - $scope.expenses.housing 
-                            - $scope.expenses.bills
-                            - $scope.expenses.food * 365
-                            - $scope.tax;
+    - $scope.expenses.medical
+    - $scope.income * $scope.expenses.retirementRate / 100
+    - $scope.income * $scope.expenses.savingsRate / 100
+    - $scope.expenses.carInsurance
+    - $scope.expenses.housing 
+    - $scope.expenses.bills
+    - $scope.expenses.food * 365
+    - $scope.tax;
+
+    $scope.taxableIncome2 = $scope.income2 - $scope.numExemptions2 * exemption - standardDeduction;
+    $scope.tax2 = Calculate.calculateTax($scope.taxableIncome2, $scope.expenses2);
+    $scope.usableIncome2 = $scope.income2 - $scope.tax2;
+    $scope.disposableIncome2 = $scope.income2 
+    - $scope.expenses2.medical
+    - $scope.income2 * $scope.expenses2.retirementRate / 100
+    - $scope.income2 * $scope.expenses2.savingsRate / 100
+    - $scope.expenses2.carInsurance
+    - $scope.expenses2.housing 
+    - $scope.expenses2.bills
+    - $scope.expenses2.food * 365
+    - $scope.tax2;
   };
   
 }]);

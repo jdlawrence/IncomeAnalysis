@@ -20,6 +20,8 @@
     <div id="header"></div>
     <div id="main">
       <div ng-controller='incomeController'>
+
+        <!-- Display of first city -->
         <div class="incomeFields">
           <h3>Income Fields</h3>
           <div class="incomeInput">
@@ -58,10 +60,56 @@
         </div> 
 
         <div class="bottomLine">Your bottom line
-        <div class="finalAmounts"><b>Usable Income: </b> {{ usableIncome | currency }} </div>
+          <div class="finalAmounts"><b>Usable Income: </b> {{ usableIncome | currency }} </div>
           <div class="finalAmounts"><b>Taxes: </b> {{ tax | currency }} </div>
           <div class="finalAmounts"><b>Disposable Income: </b> {{ disposableIncome | currency }} </div>
         </div>
+
+        <!-- Display of 2nd City -->
+        <div class="incomeFields">
+          <h3>Income Fields2</h3>
+          <div class="incomeInput">
+            Income: <input type="number" min="0" ng-model="income2" ng-init="updateIncome()" ng-change="updateIncome()">
+          </div>
+          <div class="incomeInput">
+            Number of Exemptions: <input type="number" min="0" ng-model="numExemptions2" ng-init="updateIncome()" ng-change="updateIncome()">
+          </div>
+          <div class="incomeInput">
+            Taxable Income: <input type="number" min="0" ng-model="taxableIncome2" ng-init="updateIncome()" ng-change="updateIncome()">
+          </div>
+        </div>
+        <div>
+          Food Cost (daily): <input type="number" min="0" ng-model="expenses2.food" ng-init="updateIncome()" ng-change="updateIncome()">
+        </div> 
+        <div>
+          Food Cost (annual):  {{ expenses2.food * 365 }} 
+        </div>  
+        <div>
+          Retirement Rate%: <input type="number" min="0" ng-model="expenses2.retirementRate" ng-change="updateIncome()">
+        </div>
+        <div>
+          Savings Rate%: <input type="number" min="0" ng-model="expenses2.savingsRate" ng-change="updateIncome()">
+        </div>
+        <div>
+          Medical: <input type="number" min="0" ng-model="expenses2.medical" ng-change="updateIncome()">
+        </div>
+        <div>
+          Housing: <input type="number" min="0" ng-model="expenses2.housing" ng-change="updateIncome()">
+        </div>
+        <div>
+          Bill and Utilities: <input type="number" min="0" ng-model="expenses2.bills" ng-change="updateIncome()">
+        </div>
+        <div>
+          Car Insurance: <input type="number" min="0" ng-model="expenses2.carInsurance" ng-change="updateIncome()">
+        </div> 
+
+        <div class="bottomLine">Your bottom line
+          <div class="finalAmounts"><b>Usable Income: </b> {{ usableIncome2 | currency }} </div>
+          <div class="finalAmounts"><b>Taxes: </b> {{ tax2 | currency }} </div>
+          <div class="finalAmounts"><b>Disposable Income: </b> {{ disposableIncome2 | currency }} </div>
+        </div>
+
+
       </div>
 
     </div>
