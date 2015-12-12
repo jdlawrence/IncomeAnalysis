@@ -23,11 +23,11 @@
         <div ng-controller='incomeController'>
 
           <!-- Display of first city -->
-          <div class="firstCity col-md-4">
+          <div class="firstCity col-md-4 col-md-offset-1">
             <div class="incomeFields" >
               <h3>Income Fields</h3>
               <div class="incomeInput">
-                Income: <input type="number" min="0" ng-model="income" ng-init="updateIncome()" ng-change="updateIncome()">
+                Income: <input type="number" min="0" ng-model="income" ng-init="updateIncome()" ng-change="updateIncome()" step=1000>
               </div>
               <div class="incomeInput">
                 Number of Exemptions: <input type="number" min="0" ng-model="numExemptions" ng-init="updateIncome()" ng-change="updateIncome()">
@@ -43,22 +43,22 @@
               Food Cost (annual):  {{ expenses.food * 365 }} 
             </div>  
             <div>
-              Retirement Rate%: <input type="number" min="0" ng-model="expenses.retirementRate" ng-change="updateIncome()">
+              Retirement Rate%: <input type="number" min="0" ng-model="expenses.retirementRate" ng-change="updateIncome()" step=0.5>
             </div>
             <div>
-              Savings Rate%: <input type="number" min="0" ng-model="expenses.savingsRate" ng-change="updateIncome()">
+              Savings Rate%: <input type="number" min="0" ng-model="expenses.savingsRate" ng-change="updateIncome()" step=0.5>
             </div>
             <div>
-              Medical: <input type="number" min="0" ng-model="expenses.medical" ng-change="updateIncome()">
+              Medical: <input type="number" min="0" ng-model="expenses.medical" ng-change="updateIncome()" step=100>
             </div>
             <div>
               Housing: <input type="number" min="0" ng-model="expenses.housing" ng-change="updateIncome()">
             </div>
             <div>
-              Bill and Utilities: <input type="number" min="0" ng-model="expenses.bills" ng-change="updateIncome()">
+              Bills and Utilities: <input type="number" min="0" ng-model="expenses.bills" ng-change="updateIncome()" step=500>
             </div>
             <div>
-              Car Insurance: <input type="number" min="0" ng-model="expenses.carInsurance" ng-change="updateIncome()">
+              Car Insurance: <input type="number" min="0" ng-model="expenses.carInsurance" ng-change="updateIncome()" step=100>
             </div> 
 
             <div class="bottomLine">Your bottom line
@@ -69,11 +69,11 @@
           </div>
 
           <!-- Display of 2nd City -->
-          <div class="secondCity col-md-6">
+          <div class="secondCity col-md-4 col-md-offset-1">
             <div class="incomeFields">
               <h3>Income Fields2</h3>
               <div class="incomeInput">
-                Income: <input type="number" min="0" ng-model="income2" ng-init="updateIncome()" ng-change="updateIncome()">
+                Income: <input type="number" min="0" ng-model="income2" ng-init="updateIncome()" ng-change="updateIncome()" step=1000>
               </div>
               <div class="incomeInput">
                 Number of Exemptions: <input type="number" min="0" ng-model="numExemptions2" ng-init="updateIncome()" ng-change="updateIncome()">
@@ -89,22 +89,22 @@
               Food Cost (annual):  {{ expenses2.food * 365 }} 
             </div>  
             <div>
-              Retirement Rate%: <input type="number" min="0" ng-model="expenses2.retirementRate" ng-change="updateIncome()">
+              Retirement Rate%: <input type="number" min="0" ng-model="expenses2.retirementRate" ng-change="updateIncome()" step=0.5>
             </div>
             <div>
-              Savings Rate%: <input type="number" min="0" ng-model="expenses2.savingsRate" ng-change="updateIncome()">
+              Savings Rate%: <input type="number" min="0" ng-model="expenses2.savingsRate" ng-change="updateIncome()" step=0.5>
             </div>
             <div>
-              Medical: <input type="number" min="0" ng-model="expenses2.medical" ng-change="updateIncome()">
+              Medical: <input type="number" min="0" ng-model="expenses2.medical" ng-change="updateIncome()" step=100>
             </div>
             <div>
               Housing: <input type="number" min="0" ng-model="expenses2.housing" ng-change="updateIncome()">
             </div>
             <div>
-              Bill and Utilities: <input type="number" min="0" ng-model="expenses2.bills" ng-change="updateIncome()">
+              Bill and Utilities: <input type="number" min="0" ng-model="expenses2.bills" ng-change="updateIncome()" step=500>
             </div>
             <div>
-              Car Insurance: <input type="number" min="0" ng-model="expenses2.carInsurance" ng-change="updateIncome()">
+              Car Insurance: <input type="number" min="0" ng-model="expenses2.carInsurance" ng-change="updateIncome()" step=100>
             </div> 
 
             <div class="bottomLine">Your bottom line
