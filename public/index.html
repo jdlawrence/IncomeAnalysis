@@ -52,8 +52,11 @@
               Medical: <input type="number" min="0" ng-model="expenses.medical" ng-change="updateIncome()" step=100>
             </div>
             <div>
-              Housing: <input type="number" min="0" ng-model="expenses.housing" ng-change="updateIncome()">
+              Housing (Monthly): <input type="number" min="0" ng-model="expenses.housing" ng-change="updateIncome()" step=100>
             </div>
+            <div>
+              Housing (annual):  {{ expenses.housing * 12 }} 
+            </div> 
             <div>
               Bills and Utilities: <input type="number" min="0" ng-model="expenses.bills" ng-change="updateIncome()" step=500>
             </div>
@@ -98,8 +101,11 @@
               Medical: <input type="number" min="0" ng-model="expenses2.medical" ng-change="updateIncome()" step=100>
             </div>
             <div>
-              Housing: <input type="number" min="0" ng-model="expenses2.housing" ng-change="updateIncome()">
+            Housing (Monthly): <input type="number" min="0" ng-model="expenses2.housing" ng-change="updateIncome()" step=100>
             </div>
+            <div>
+              Housing (annual):  {{ expenses2.housing * 12 }} 
+            </div> 
             <div>
               Bill and Utilities: <input type="number" min="0" ng-model="expenses2.bills" ng-change="updateIncome()" step=500>
             </div>

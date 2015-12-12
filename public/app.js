@@ -29,7 +29,7 @@ app.controller('incomeController', ['$scope', 'Calculate', function($scope, Calc
   
   // 1st city expenses
   $scope.expenses = {
-    housing: 18000,
+    housing: 1500,
     bills: 5400,
     food: 30,
     savingsRate: 10,
@@ -42,7 +42,7 @@ app.controller('incomeController', ['$scope', 'Calculate', function($scope, Calc
 
   // 2nd city expenses
   $scope.expenses2 = {
-    housing: 18000,
+    housing: 1500,
     bills: 5400,
     food: 30,
     savingsRate: 10,
@@ -62,7 +62,7 @@ app.controller('incomeController', ['$scope', 'Calculate', function($scope, Calc
     - $scope.income * $scope.expenses.retirementRate / 100
     - $scope.income * $scope.expenses.savingsRate / 100
     - $scope.expenses.carInsurance
-    - $scope.expenses.housing 
+    - $scope.expenses.housing * 12 
     - $scope.expenses.bills
     - $scope.expenses.food * 365
     - $scope.tax;
@@ -75,7 +75,7 @@ app.controller('incomeController', ['$scope', 'Calculate', function($scope, Calc
     - $scope.income2 * $scope.expenses2.retirementRate / 100
     - $scope.income2 * $scope.expenses2.savingsRate / 100
     - $scope.expenses2.carInsurance
-    - $scope.expenses2.housing 
+    - $scope.expenses2.housing * 12
     - $scope.expenses2.bills
     - $scope.expenses2.food * 365
     - $scope.tax2;
