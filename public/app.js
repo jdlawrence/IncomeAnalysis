@@ -5,7 +5,7 @@ app.controller('incomeController', ['$scope', 'Calculate', function($scope, Calc
   var exemption = 3900;
 
   // 1st City
-  $scope.income = 105000;
+  $scope.income = 90000;
   $scope.numExemptions = 1;
   $scope.taxableIncome = $scope.income - $scope.numExemptions * exemption; 
   $scope.usableIncome = 0;

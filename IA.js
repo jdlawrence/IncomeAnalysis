@@ -12,6 +12,18 @@ var federalTax = [
 {bracket: 413200, rate: 0.396}
 ];
 
+var californiaTax = [
+{bracket: 0, rate: 0.0},
+{bracket: 7850, rate: 0.01},
+{bracket: 18610, rate: 0.02},
+{bracket: 29372, rate: 0.04},
+{bracket: 40773, rate: 0.06},
+{bracket: 51530, rate: 0.08},
+{bracket: 262222, rate: 0.093},
+{bracket: 315866, rate: 0.103},
+{bracket: 526443, rate: 0.113}
+{bracket: 526444, rate: 0.123}
+];
 var expenses = {
   rent: 0,
   bills: 0,
@@ -22,7 +34,8 @@ var expenses = {
   carInsurance: 2500,
   medical: 1000,
   retirementRate: 0.15,
-  fedTax: federalTax
+  fedTax: federalTax,
+  stateTax: californiaTax 
 };
 
 expenses.savings = income * expenses.savingsRate;
@@ -101,8 +114,8 @@ function calculateTax(income, expensesObj){
 console.log('Your tax owed is: ', calculateTax(income, expenses));
 
 console.log('Your disposable is income is: ', income 
-                                            - calculateTax(income, expenses)
-                                            - expenses.savings);
+  - calculateTax(income, expenses)
+  - expenses.savings);
 
 
 
