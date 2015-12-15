@@ -17,14 +17,26 @@ app.controller('incomeController', ['$scope', 'Calculate', function($scope, Calc
   $scope.usableIncome2 = 0;
 
   var federalTax = [
-  {bracket: 0, rate: 0.0},
-  {bracket: 9225, rate: 0.10},
-  {bracket: 37450, rate: 0.15},
-  {bracket: 90750, rate: 0.25},
-  {bracket: 189300, rate: 0.28},
-  {bracket: 411500, rate: 0.33},
-  {bracket: 413200, rate: 0.35},
-  {bracket: 413200, rate: 0.396}
+  // {bracket: 0, rate: 0.0},
+  // {bracket: 9225, rate: 0.10},
+  // {bracket: 37450, rate: 0.15},
+  // {bracket: 90750, rate: 0.25},
+  // {bracket: 189300, rate: 0.28},
+  // {bracket: 411500, rate: 0.33},
+  // {bracket: 413200, rate: 0.35},
+  // {bracket: 413200, rate: 0.396}
+  {bracket: 0, rate: 0.0, difference: 0},
+{bracket: 7850, rate: 0.01, difference: 7850},
+{bracket: 18610, rate: 0.02, difference: 10760},
+{bracket: 29372, rate: 0.04, difference: 10762},
+{bracket: 40773, rate: 0.06, difference: 11361},
+{bracket: 51530, rate: 0.08, difference: 10757},
+{bracket: 262222, rate: 0.093, difference: 210692},
+{bracket: 315866, rate: 0.103, difference: 53644},
+{bracket: 526443, rate: 0.113, difference: 210577},
+{bracket: 1000000, rate: 0.123, difference: 473557},
+{bracket: 1000000, rate: 0.133, difference: 0}
+
   ];
   
   // 1st city expenses
@@ -68,7 +80,8 @@ app.controller('incomeController', ['$scope', 'Calculate', function($scope, Calc
     - $scope.tax;
 
     $scope.taxableIncome2 = $scope.income2 - $scope.numExemptions2 * exemption - standardDeduction;
-    $scope.tax2 = Calculate.calculateTax($scope.taxableIncome2, $scope.expenses2);
+    console.log('tax2 is ',Calculate.calculateTax2($scope.taxableIncome2, $scope.expenses2));
+    $scope.tax2 = Calculate.calculateTax2($scope.taxableIncome2, $scope.expenses2.fedTax);
     $scope.usableIncome2 = $scope.income2 - $scope.tax2;
     $scope.disposableIncome2 = $scope.income2 
     - $scope.expenses2.medical
@@ -86,6 +99,35 @@ app.controller('incomeController', ['$scope', 'Calculate', function($scope, Calc
 app.service('Calculate', function(){
   this.add = function(a, b) {
     return a + b;
+  };
+
+  this.calculateTax2 = function(income, expenses) {
+    // console.log('inside tax2');
+    var tax = 0;
+
+    for (var i = 0; i < expenses.length; i++) {
+      // If income is higher than highest bracket, tax the difference 
+      // between income and the current bracket
+      // console.log('i is', i);
+      console.log('IIIIIIIIIIIIIIIIIIIIIII', i);
+      if (i === expenses.length - 1) {
+        tax += (income - expenses[i].bracket) * expenses[i].rate;
+      }
+
+      // If income is below max in bracket, tax the difference
+      // between the income and bracket below
+      else if (expenses[i].bracket > income){
+        tax += (income - expenses[i-1].bracket) * expenses[i].rate;
+        break;
+      }
+
+      // Else the income is higher than the current bracket 
+      // tax the difference between the current bracket and the one below
+      else{
+        tax += expenses[i].difference * expenses[i].rate;
+      }
+    }
+    return tax;
   };
 
   this.calculateTax = function(income, expensesObj){

@@ -1,4 +1,4 @@
-var income = 105000;
+var income = 7000;
 var standardDeduction = 6200;
 
 var federalTax = [
@@ -13,17 +13,19 @@ var federalTax = [
 ];
 
 var californiaTax = [
-{bracket: 0, rate: 0.0},
-{bracket: 7850, rate: 0.01},
-{bracket: 18610, rate: 0.02},
-{bracket: 29372, rate: 0.04},
-{bracket: 40773, rate: 0.06},
-{bracket: 51530, rate: 0.08},
-{bracket: 262222, rate: 0.093},
-{bracket: 315866, rate: 0.103},
-{bracket: 526443, rate: 0.113}
-{bracket: 526444, rate: 0.123}
+{bracket: 0, rate: 0.0, difference: 0},
+{bracket: 7850, rate: 0.01, difference: 7850},
+{bracket: 18610, rate: 0.02, difference: 10760},
+{bracket: 29372, rate: 0.04, difference: 10762},
+{bracket: 40773, rate: 0.06, difference: 11361},
+{bracket: 51530, rate: 0.08, difference: 10757},
+{bracket: 262222, rate: 0.093, difference: 210692},
+{bracket: 315866, rate: 0.103, difference: 53644},
+{bracket: 526443, rate: 0.113, difference: 210577},
+{bracket: 1000000, rate: 0.123, difference: 473557},
+{bracket: 1000000, rate: 0.133, difference: 0}
 ];
+
 var expenses = {
   rent: 0,
   bills: 0,
@@ -85,6 +87,7 @@ function calculateTax(income, expensesObj){
   return Math.max(taxOwed(0, income - standardDeduction, income - standardDeduction, 0), 0) ;
 }
 
+
 // // Ramda Refactor
 // var R = require('ramda');
 // var income = 900000;
@@ -111,11 +114,42 @@ function calculateTax(income, expensesObj){
 //     R.addIndex(R.map)(findTax(income))
 // );
 
-console.log('Your tax owed is: ', calculateTax(income, expenses));
+// calculateTax2 :: integer -> object -> integer
+function calculateTax2(income, expenses) {
+  var tax = 0;
 
-console.log('Your disposable is income is: ', income 
-  - calculateTax(income, expenses)
-  - expenses.savings);
+  // console.log(expenses.stateTax[1].bracket, '*****************');
+  for (var i = 0; i < expenses.length; i++) {
+    // If income is higher than highest bracket, tax the difference 
+    // between income and the current bracket
+    if (i === expenses.length - 1) {
+      tax += (income - expenses[i].bracket) * expenses[i].rate;
+    }
+
+    // If income is below max in bracket, tax the difference
+    // between the income and bracket below
+    else if (expenses[i].bracket > income){
+      tax += (income - expenses[i-1].bracket) * expenses[i].rate;
+      break;
+    }
+
+    // Else the income is higher than the current bracket 
+    // tax the difference between the current bracket and the one below
+    else{
+      tax += expenses[i].difference * expenses[i].rate;
+    }
+  }
+  return tax;
+}
+
+console.log('tax2:', calculateTax2(income, expenses.stateTax));
+// console.log('tax2:', expenses.stateTax);
+
+// console.log('Your tax owed is: ', calculateTax(income, expenses));
+
+// console.log('Your disposable is income is: ', income 
+//   - calculateTax(income, expenses)
+//   - expenses.savings);
 
 
 
