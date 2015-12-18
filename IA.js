@@ -96,7 +96,7 @@ function calculateTax(income, expensesObj){
 // var rateLens = R.lensProp('rate');
 
 // var findTax = function (income, current, index, list) {
-//     if (index === 0 || bracketLens(list[index-1]) > income) {
+//     if (index === 0 || bracketLens(list[index]) > income) {
 //         return 0;
 //     } else {
 //         return R.compose(
